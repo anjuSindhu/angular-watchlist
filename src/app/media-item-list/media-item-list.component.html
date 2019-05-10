@@ -1,0 +1,21 @@
+<header 
+    [ngClass]="{'medium-movies':medium === 'Movies', 'medium-series':medium === 'Series'}">
+    <ng-container
+      *ngIf="medium==''; then All; else filtered">
+    </ng-container>
+    <ng-template #All><h2 >All</h2></ng-template>
+    <ng-template #filtered><h2>{{medium}}</h2></ng-template>
+    <div>{{ mediaItems | categoryList }}</div>
+</header>
+<section>
+  <app-media-item
+    [ngClass]="{'medium-all': mediaItem.medium==='All', 'medium-movies': mediaItem.medium==='Movies', 'medium-series':mediaItem.medium==='Series'}" 
+    *ngFor="let mediaItem of mediaItems"
+    [mediaItem]="mediaItem"
+    (delete)="onMediaItemDelete($event)"></app-media-item>
+</section>
+<footer>
+  <a routerLink="/add">
+    <img src="assets/media/01.png" class="icon" />
+  </a>
+</footer>
